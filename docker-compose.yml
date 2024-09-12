@@ -47,6 +47,13 @@ services:
                 - '-p${DB_PASSWORD}'
             retries: 3
             timeout: 5s
+    buggregator:
+        image: ghcr.io/buggregator/server:latest
+        ports:
+            - 127.0.0.1:8000:8000
+            - 127.0.0.1:1026:1026
+            - 127.0.0.1:9912:9912
+            - 127.0.0.1:9913:9913
 networks:
     sail:
         driver: bridge
