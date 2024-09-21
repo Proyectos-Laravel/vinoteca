@@ -7,7 +7,7 @@ use App\Models\Category;
 interface CategoryRepositoryInterface
 {
     
-    public function model(?string $slug = null): Category;
+    public function model(?string $slug = null); 
 
     public function paginate(array $counts = [], array $relationships = [], int $perPage = 10);
 
