@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Wine;
 
+use App\Models\Category;
+use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\CategoryRequest;
 use App\Repositories\Category\CategoryRepositoryInterface;
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
 
 class CategoryController extends Controller
 {
@@ -41,4 +42,15 @@ class CategoryController extends Controller
         session()->flash('success', 'Categoria creada con éxito');
         return redirect()->route(route: 'categories.index');
     }
+
+    public function edit(Category $category): View
+    {        
+        return view('wine.category.edit', [
+            'category' => $category,
+            'action' => route('categories.update', $category),
+            'method' => 'PUT',
+            'submit' => 'Actualizar'
+        ]);
+    }
+
 }
