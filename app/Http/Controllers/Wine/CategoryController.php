@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\CategoryRequest;
 use App\Repositories\Category\CategoryRepositoryInterface;
+use Exception;
 
 class CategoryController extends Controller
 {
@@ -58,6 +59,17 @@ class CategoryController extends Controller
         $this->repository->update($request->validated(), $category);
         session()->flash('success', 'Categoria actualizada con éxito');
         return redirect()->route(route: 'categories.index');
+    }
+
+    public function destroy(Category $category)
+    {
+        try {
+            $this->repository->delete($category);
+            session()->flash('success', 'Categoria eliminada con éxito');
+        } catch (Exception $exception) {
+            session()->flash('error', $exception->getMessage());
+        }
+        return redirect()->route('categories.index');
     }
 
 }
