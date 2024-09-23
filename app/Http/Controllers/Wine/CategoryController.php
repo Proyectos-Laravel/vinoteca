@@ -53,4 +53,11 @@ class CategoryController extends Controller
         ]);
     }
 
+    public function update(CategoryRequest $request, Category $category)
+    {
+        $this->repository->update($request->validated(), $category);
+        session()->flash('success', 'Categoria actualizada con éxito');
+        return redirect()->route(route: 'categories.index');
+    }
+
 }
