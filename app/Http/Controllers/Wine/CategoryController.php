@@ -12,7 +12,6 @@ use Exception;
 
 class CategoryController extends Controller
 {
-
     public function __construct(private readonly CategoryRepositoryInterface $repository)
     {
         
