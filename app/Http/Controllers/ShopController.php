@@ -24,4 +24,28 @@ class ShopController extends Controller
 
         return view('shop.index', compact('wines'));
     }
+
+    public function addToCart()
+    {
+        $this->addProducToCart();
+        return redirect()->route('shop.index');
+    }
+
+    public function increment()
+    {
+        $this->incrementProducQuantity();
+        return redirect()->route('shop.index');
+    }
+
+    public function decrement()
+    {
+        $this->decrementProductQuantity();
+        return redirect()->route('shop.index');
+    }
+
+    public function remove()
+    {
+        $this->removeProduct();
+        return redirect()->route('shop.index');
+    }
 }

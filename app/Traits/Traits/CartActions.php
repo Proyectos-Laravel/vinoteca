@@ -14,6 +14,9 @@ trait CartActions
 
         $wine = $this->repository->find($wineId);
         $this->cart->add($wine, $quantity);
+
+        session()->flash('success', 'Producto añadido al carrito');
+
     }
 
     public function incrementProducQuantity(): void
@@ -30,15 +33,18 @@ trait CartActions
     public function decrementProductQuantity(): void
     {
         $this->cart->decrement(request(key: 'wine_id'));
+        session()->flash('success', 'Cantidad decrementada');
     }
 
     public function removeProduct(): void
     {
         $this->cart->remove(request(key: 'wine_id'));
+        session()->flash('success', 'Producto eliminado del carrito');
     }
 
     public function clearCart(): void
-    {
+    {        
         $this->cart->clear();
+        session()->flash('success', 'El carrito ha sido vaciado');
     }
 }
